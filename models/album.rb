@@ -29,4 +29,11 @@ class Album
     return result.map {|album| Album.new(album)}
   end
 
+  def self.find(search_id)
+    sql = "SELECT * FROM albums WHERE artist_id = $1"
+    values = [search_id]
+    result = SqlRunner.run(sql, values)
+    return result.map { |album| Album.new(album) }
+  end
+
 end
